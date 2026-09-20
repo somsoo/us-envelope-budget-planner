@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://us-envelope-budget-planner.enjoy-onepage.com/sitemap.xml
