@@ -1,28 +1,679 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
+<meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Cash Envelope Budget Planner - Under maintenance</title>
-<meta name="robots" content="noindex, nofollow">
-<meta name="site-status" content="maintenance">
-<meta name="description" content="This tool is temporarily offline while it is rebuilt.">
+<title>Cash Envelope Budget Planner</title>
+<meta name="description" content="Allocate income into virtual cash envelopes with zero-based budgeting.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://us-envelope-budget-planner.enjoy-onepage.com/">
+<meta name="theme-color" content="#2563eb">
+<link rel="icon" href="/favicon.ico">
+<meta property="og:locale" content="en_US">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Cash Envelope Budget Planner">
+<meta property="og:title" content="Cash Envelope Budget Planner">
+<meta property="og:description" content="Allocate income into virtual cash envelopes with zero-based budgeting.">
+<meta property="og:url" content="https://us-envelope-budget-planner.enjoy-onepage.com/">
+<meta property="og:image" content="https://us-envelope-budget-planner.enjoy-onepage.com/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Cash Envelope Budget Planner">
+<meta name="twitter:description" content="Allocate income into virtual cash envelopes with zero-based budgeting.">
+<meta name="twitter:image" content="https://us-envelope-budget-planner.enjoy-onepage.com/og-image.png">
+<link rel="alternate" type="application/rss+xml" title="Envelope Budget Planner RSS" href="https://us-envelope-budget-planner.enjoy-onepage.com/rss.xml">
+<link rel="sitemap" type="application/xml" href="https://us-envelope-budget-planner.enjoy-onepage.com/sitemap.xml">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebApplication",
+      "@id": "https://us-envelope-budget-planner.enjoy-onepage.com/#webapp",
+      "name": "Cash Envelope Budget Planner",
+      "url": "https://us-envelope-budget-planner.enjoy-onepage.com/",
+      "applicationCategory": "FinanceApplication",
+      "operatingSystem": "All",
+      "inLanguage": "en",
+      "description": "A private zero-based cash envelope budgeting planner for allocating income, tracking categorical balances, and calculating cash stuffing denominations.",
+      "image": "https://us-envelope-budget-planner.enjoy-onepage.com/og-image.png",
+      "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+    },
+    {
+      "@type": "FAQPage",
+      "@id": "https://us-envelope-budget-planner.enjoy-onepage.com/#faq",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "What is the cash envelope budgeting method?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "The cash envelope method divides your monthly income into dedicated spending categories or envelopes. Once an envelope is empty, spending in that category halts until the next paycheck."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What is zero-based budgeting?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Zero-based budgeting is an allocation system where Total Income minus Total Budgeted Envelopes equals zero, ensuring every dollar has an assigned purpose before the month begins."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can I customize the envelope categories?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. You can add custom envelopes, adjust budget caps, log individual transactions, and track remaining balances in real time."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Is my financial data stored securely?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "All budget numbers and spending logs are stored strictly inside your browser's local storage. No data is ever transmitted to external servers or cloud accounts."
+          }
+        }
+      ]
+    }
+  ]
+}
+</script>
+<!-- ADSENSE START: loader -->
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2228289204702106" crossorigin="anonymous"></script>
+<!-- ADSENSE END: loader -->
 <style>
-  body { margin: 0; font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; background: #f8fafc; color: #0f172a; }
-  main { max-width: 560px; margin: 12vh auto; padding: 32px 24px; background: #ffffff; border: 1px solid #e2e8f0; border-radius: 16px; }
-  h1 { font-size: 1.4rem; margin: 0 0 12px; }
-  p { line-height: 1.6; color: #334155; }
-  a { color: #1d4ed8; font-weight: 600; }
-  .tag { display: inline-block; font-size: .8rem; font-weight: 700; color: #92400e; background: #fef3c7; border-radius: 999px; padding: 4px 10px; margin-bottom: 14px; }
+:root{--bg:#f8fafc;--card:#fff;--ink:#0f172a;--muted:#475569;--accent:#2563eb;--accent-hover:#1d4ed8;--line:#e2e8f0;--ok:#16a34a;--warn:#d97706;--danger:#dc2626}
+*{box-sizing:border-box}
+html,body{margin:0;max-width:100%;overflow-x:hidden}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;background:var(--bg);color:var(--ink);line-height:1.6;overflow-wrap:anywhere}
+.header{background:linear-gradient(135deg,#1e3a8a,#2563eb);color:#fff;text-align:center;padding:26px 16px 22px}
+.header h1{margin:0;font-size:1.7rem}
+.header-sub{opacity:.92;margin-top:6px;font-size:.95rem}
+.wrap{max-width:1100px;margin:0 auto;padding:12px 14px 8px}
+.grid2{display:grid;grid-template-columns:1fr;gap:14px}
+@media (min-width:1024px){.grid2{grid-template-columns:7fr 5fr;align-items:start}}
+.card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px;margin-bottom:14px;box-shadow:0 1px 3px rgba(15,23,42,.04)}
+.card h2{margin:0 0 10px;font-size:1.15rem;color:var(--ink)}
+.lbl{display:block;font-size:.84rem;font-weight:600;color:var(--muted);margin-bottom:4px}
+.input{width:100%;padding:9px 11px;border:1px solid var(--line);border-radius:8px;font-size:.92rem;background:#fff;color:var(--ink)}
+.input:focus{outline:2px solid var(--accent);outline-offset:1px}
+.btn{display:inline-flex;align-items:center;justify-content:center;padding:9px 14px;border-radius:8px;font-size:.88rem;font-weight:600;cursor:pointer;border:1px solid transparent;transition:background-color .15s}
+.btn.primary{background:var(--accent);color:#fff}
+.btn.primary:hover{background:var(--accent-hover)}
+.btn.sm{padding:6px 10px;font-size:.8rem;background:#fff;border-color:var(--line);color:var(--ink)}
+.btn.sm:hover{background:#f1f5f9}
+.btn.danger{background:#fee2e2;color:#991b1b;border-color:#fecaca}
+.btn.danger:hover{background:#fecaca}
+.metric-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-bottom:12px}
+.metric-box{background:#f8fafc;border:1px solid var(--line);border-radius:8px;padding:10px 12px;text-align:center}
+.metric-lbl{font-size:.78rem;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.02em}
+.metric-val{font-size:1.25rem;font-weight:700;color:var(--ink);margin:4px 0}
+.env-card{background:#fff;border:1px solid var(--line);border-radius:8px;padding:12px;margin-bottom:10px}
+.env-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px}
+.env-title{font-weight:700;font-size:.95rem}
+.env-badge{font-size:.78rem;padding:2px 8px;border-radius:999px;font-weight:600}
+.badge-ok{background:#dcfce7;color:#166534}
+.badge-warn{background:#fef3c7;color:#92400e}
+.badge-danger{background:#fee2e2;color:#991b1b}
+.progress-bar{height:7px;background:#e2e8f0;border-radius:999px;overflow:hidden;margin:6px 0}
+.progress-fill{height:100%;transition:width .3s}
+.env-stats{display:flex;justify-content:space-between;font-size:.82rem;color:var(--muted)}
+.env-actions{display:flex;gap:6px;margin-top:8px}
+.ad-box{width:100%;max-width:960px;margin:16px auto;text-align:center;overflow:hidden;min-height:100px}
+.ad-box.ad-top{min-height:90px}
+.ad-box.ad-mid{min-height:250px}
+.ad-box.ad-bottom{min-height:280px;margin:24px auto 16px}
+.ad-box ins{display:block;margin:0 auto}
+.faq-item{border-bottom:1px solid var(--line);padding:10px 0}
+.faq-item:last-child{border-bottom:none}
+.faq-item h3{margin:0 0 4px;font-size:.95rem;color:var(--ink)}
+.faq-item p{margin:0;font-size:.88rem;color:var(--muted);line-height:1.5}
+.notice{background:#eff6ff;border-color:#bfdbfe;font-size:.86rem;color:#1e40af}
+.src{font-size:.78rem;color:var(--muted);margin-top:10px;font-style:italic}
+.footer{text-align:center;padding:22px 14px 28px;font-size:.82rem;color:var(--muted);border-top:1px solid var(--line);margin-top:20px}
+.footer a{color:var(--accent);text-decoration:none;margin:0 6px}
+.footer a:hover{text-decoration:underline}
+.toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:#0f172a;color:#fff;padding:8px 16px;border-radius:8px;font-size:.85rem;box-shadow:0 4px 12px rgba(0,0,0,.15);opacity:0;pointer-events:none;transition:opacity .2s;z-index:9999}
+.toast.show{opacity:1}
+.denom-table{width:100%;border-collapse:collapse;font-size:.84rem;margin-top:6px}
+.denom-table th,.denom-table td{padding:6px 8px;border:1px solid var(--line);text-align:center}
+.denom-table th{background:#f8fafc;color:var(--muted);font-weight:600}
 </style>
 </head>
 <body>
-<main>
-  <span class="tag">Under maintenance</span>
+
+<header class="header">
   <h1>Cash Envelope Budget Planner</h1>
-  <p>This tool is temporarily offline. We found that the previous version did not work the way it was described, so we took it down while we rebuild it properly.</p>
-  <p>Please check back later.</p>
-  <p><a href="https://enjoy-onepage.com/">Browse our other free tools</a></p>
+  <div class="header-sub">Zero-Based Envelope Budgeting &amp; Cash Stuffing Organizer</div>
+</header>
+
+<main class="wrap">
+  <!-- ADSENSE START: top -->
+  <div class="ad-box ad-top">
+    <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-2228289204702106" data-ad-slot="3824727725" data-ad-format="auto" data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+  </div>
+  <!-- ADSENSE END: top -->
+
+  <div class="grid2">
+    <!-- Envelopes Workspace -->
+    <section class="card" aria-labelledby="envelopes-h">
+      <h2 id="envelopes-h">✉️ Monthly Cash Envelopes</h2>
+
+      <div style="display:flex;gap:10px;align-items:flex-end;margin-bottom:14px;flex-wrap:wrap">
+        <div style="flex:1;min-width:180px">
+          <label for="monthlyIncome" class="lbl">Total Monthly Income ($)</label>
+          <input type="number" id="monthlyIncome" class="input" value="4000" min="0" step="50" placeholder="e.g. 4000">
+        </div>
+        <div style="flex:0 0 auto">
+          <button type="button" id="btnAddNewEnv" class="btn primary" style="height:42px">+ Add Envelope</button>
+        </div>
+      </div>
+
+      <!-- Add Envelope Form (Inline Drawer) -->
+      <div id="addEnvDrawer" style="display:none;background:#f8fafc;border:1px solid var(--line);border-radius:8px;padding:12px;margin-bottom:14px">
+        <div style="font-weight:600;font-size:.9rem;margin-bottom:8px">New Envelope Category</div>
+        <div style="display:grid;grid-template-columns:2fr 1fr;gap:8px;margin-bottom:8px">
+          <input type="text" id="newEnvName" class="input" placeholder="e.g. Vacation Sinking Fund">
+          <input type="number" id="newEnvBudget" class="input" placeholder="Cap ($)" min="0" step="10">
+        </div>
+        <div style="display:flex;gap:8px;justify-content:flex-end">
+          <button type="button" id="btnCancelEnv" class="btn sm">Cancel</button>
+          <button type="button" id="btnSaveEnv" class="btn sm" style="background:var(--accent);color:#fff">Save Envelope</button>
+        </div>
+      </div>
+
+      <!-- Quick Expense Logger -->
+      <div style="background:#f1f5f9;border:1px solid var(--line);border-radius:8px;padding:12px;margin-bottom:14px">
+        <div style="font-weight:600;font-size:.88rem;margin-bottom:6px">💸 Quick Log Expense</div>
+        <div style="display:grid;grid-template-columns:1.5fr 1fr 1fr;gap:8px;margin-bottom:8px">
+          <select id="logEnvSelect" class="input" aria-label="Select Envelope">
+            <!-- Populated via JS -->
+          </select>
+          <input type="number" id="logAmount" class="input" placeholder="Amount ($)" min="0" step="1">
+          <input type="text" id="logNote" class="input" placeholder="Note (optional)">
+        </div>
+        <button type="button" id="btnLogExpense" class="btn primary sm" style="width:100%">Record Expense to Envelope</button>
+      </div>
+
+      <!-- Envelope Cards Container -->
+      <div id="envelopeContainer" aria-label="Envelope budget list">
+        <!-- Dynamically rendered -->
+      </div>
+
+      <div style="display:flex;gap:8px;margin-top:12px;flex-wrap:wrap">
+        <button type="button" id="btnExportCsv" class="btn sm">⬇ Export CSV</button>
+        <button type="button" id="btnExportJson" class="btn sm">⬇ Export Backup</button>
+        <button type="button" id="btnResetSample" class="btn sm">Reset to Standard 50/30/20 Plan</button>
+      </div>
+    </section>
+
+    <!-- Zero-Based Summary & Denominations -->
+    <section class="card" aria-labelledby="summary-h">
+      <h2 id="summary-h">🎯 Zero-Based Budget Summary</h2>
+
+      <div class="metric-grid">
+        <div class="metric-box">
+          <div class="metric-lbl">Total Budgeted</div>
+          <div id="resTotalBudgeted" class="metric-val">$0</div>
+          <div class="src" style="margin:0">Allocated in envelopes</div>
+        </div>
+        <div class="metric-box">
+          <div class="metric-lbl">Unassigned / Remaining</div>
+          <div id="resLeftToBudget" class="metric-val" style="color:var(--ok)">$0</div>
+          <div id="resZeroStatus" class="src" style="margin:0">Goal: $0 (Every Dollar Counted)</div>
+        </div>
+      </div>
+
+      <div class="metric-grid">
+        <div class="metric-box">
+          <div class="metric-lbl">Total Spent</div>
+          <div id="resTotalSpent" class="metric-val" style="color:var(--danger)">$0</div>
+          <div class="src" style="margin:0">Actual outflows</div>
+        </div>
+        <div class="metric-box">
+          <div class="metric-lbl">Total Cash Remaining</div>
+          <div id="resTotalRemaining" class="metric-val">$0</div>
+          <div class="src" style="margin:0">Available cash</div>
+        </div>
+      </div>
+
+      <h3 style="font-size:.95rem;margin:16px 0 6px">💵 Cash Stuffing Denomination Calculator</h3>
+      <p style="font-size:.82rem;color:var(--muted);margin:0 0 8px">Bank teller breakdown for physical cash withdrawers:</p>
+      <table class="denom-table" aria-label="Cash bill denomination breakdown">
+        <thead>
+          <tr>
+            <th>$100</th>
+            <th>$50</th>
+            <th>$20</th>
+            <th>$10</th>
+            <th>$5</th>
+            <th>$1</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td id="d100">0</td>
+            <td id="d50">0</td>
+            <td id="d20">0</td>
+            <td id="d10">0</td>
+            <td id="d5">0</td>
+            <td id="d1">0</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div style="margin-top:16px">
+        <button type="button" id="btnSharePlanner" class="btn sm" style="width:100%">🔗 Share Budget Planner</button>
+      </div>
+    </section>
+  </div>
+
+  <!-- ADSENSE START: mid -->
+  <div class="ad-box ad-mid">
+    <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-2228289204702106" data-ad-slot="1186914926" data-ad-format="rectangle" data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+  </div>
+  <!-- ADSENSE END: mid -->
+
+  <!-- Educational Guide -->
+  <section class="card" aria-labelledby="guide-h">
+    <h2 id="guide-h">📖 The Philosophy of Cash Envelope Budgeting</h2>
+    <p>The cash envelope system is a classic tactile personal finance methodology popularized by Dave Ramsey to establish absolute boundaries around discretionary spending:</p>
+    <ul>
+      <li><strong>Physical Friction Curbing Impulse:</strong> Swiping plastic or using contactless tap desensitizes the brain to loss. Handling tangible dollar bills or maintaining rigid virtual envelope caps creates neurological awareness, proven to reduce incidental spending by 15% to 20%.</li>
+      <li><strong>Zero-Based Allocation Rule:</strong> At the beginning of each pay cycle, every single dollar earned is assigned a job: Income minus (Fixed Costs + Envelopes + Savings) = $0. If an envelope empties before payday, no additional funds may be spent until the next cycle.</li>
+      <li><strong>Virtual Envelopes for Modern Life:</strong> While physical cash stuffing is ideal for groceries, dining out, and entertainment, digital recurring bills (mortgage, insurance, phone) function as fixed virtual envelopes without carrying physical cash.</li>
+    </ul>
+    <p class="src">References: Ramsey D. (2013) <em>The Total Money Makeover</em>; Consumer Financial Protection Bureau (CFPB) Household Budgeting Guide.</p>
+  </section>
+
+  <section class="card" id="faq" aria-labelledby="faq-h">
+    <h2 id="faq-h">❓ Frequently Asked Questions</h2>
+    <div class="faq-item"><h3>What is the cash envelope budgeting method?</h3><p>The cash envelope method divides your monthly income into dedicated spending categories or envelopes. Once an envelope is empty, spending in that category halts until the next paycheck.</p></div>
+    <div class="faq-item"><h3>What is zero-based budgeting?</h3><p>Zero-based budgeting is an allocation system where Total Income minus Total Budgeted Envelopes equals zero, ensuring every dollar has an assigned purpose before the month begins.</p></div>
+    <div class="faq-item"><h3>Can I customize the envelope categories?</h3><p>Yes. You can add custom envelopes, adjust budget caps, log individual transactions, and track remaining balances in real time.</p></div>
+    <div class="faq-item"><h3>Is my financial data stored securely?</h3><p>All budget numbers and spending logs are stored strictly inside your browser's local storage. No data is ever transmitted to external servers or cloud accounts.</p></div>
+  </section>
+
+  <section class="card notice" aria-labelledby="note-h">
+    <h2 id="note-h">⚠️ Financial Advisory Notice</h2>
+    <p>This envelope planner is an educational and organizational tool for self-budgeting. It does not provide certified financial planning, debt restructuring, or official accounting advice.</p>
+  </section>
 </main>
+
+<!-- ADSENSE START: bottom -->
+<div class="ad-box ad-bottom">
+  <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-2228289204702106" data-ad-slot="3416334507" data-ad-format="auto" data-full-width-responsive="true"></ins>
+  <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+</div>
+<!-- ADSENSE END: bottom -->
+
+<footer class="footer">
+  <p>Free Cash Envelope Budget Planner · 100% private and client-side.</p>
+  <p><a href="/disclaimer.html">Disclaimer</a> | <a href="/privacy.html">Privacy Policy</a> | <a href="/terms.html">Terms of Service</a></p>
+</footer>
+
+<div id="global-ux-toast" class="toast" role="status" aria-live="polite"></div>
+
+<!-- LOGIC START -->
+<script>
+(function () {
+  'use strict';
+  var STORAGE_KEY = 'us_envelope_budget_state';
+
+  var DEFAULT_ENVELOPES = [
+    { id: 1, name: '🏠 Housing & Rent', budget: 1400, spent: 1400 },
+    { id: 2, name: '🛒 Groceries & Food', budget: 550, spent: 340 },
+    { id: 3, name: '💡 Utilities & Bills', budget: 280, spent: 195 },
+    { id: 4, name: '🚗 Gas & Transit', budget: 220, spent: 145 },
+    { id: 5, name: '🍽️ Dining Out & Coffee', budget: 250, spent: 180 },
+    { id: 6, name: '🎬 Entertainment & Fun', budget: 200, spent: 120 },
+    { id: 7, name: '💊 Healthcare & Pharmacy', budget: 150, spent: 45 },
+    { id: 8, name: '💰 Emergency Savings', budget: 500, spent: 500 },
+    { id: 9, name: '💳 Debt Repayment', budget: 450, spent: 450 }
+  ];
+
+  var state = {
+    income: 4000,
+    envelopes: JSON.parse(JSON.stringify(DEFAULT_ENVELOPES))
+  };
+
+  function $(id) { return document.getElementById(id); }
+
+  function showToast(msg) {
+    var toast = $('global-ux-toast');
+    if (!toast) return;
+    toast.textContent = msg;
+    toast.classList.add('show');
+    clearTimeout(toast._tid);
+    toast._tid = setTimeout(function () { toast.classList.remove('show'); }, 2200);
+  }
+
+  function loadState() {
+    try {
+      var saved = localStorage.getItem(STORAGE_KEY);
+      if (saved) {
+        var parsed = JSON.parse(saved);
+        if (parsed && typeof parsed.income === 'number' && Array.isArray(parsed.envelopes)) {
+          state = parsed;
+        }
+      }
+    } catch (e) {}
+  }
+
+  function saveState() {
+    try {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+    } catch (e) {}
+  }
+
+  function computeDenominations(amount) {
+    var denoms = [100, 50, 20, 10, 5, 1];
+    var counts = { 100: 0, 50: 0, 20: 0, 10: 0, 5: 0, 1: 0 };
+    var remaining = Math.max(0, Math.round(amount));
+
+    for (var i = 0; i < denoms.length; i++) {
+      var d = denoms[i];
+      if (remaining >= d) {
+        counts[d] = Math.floor(remaining / d);
+        remaining = remaining % d;
+      }
+    }
+    return counts;
+  }
+
+  function render() {
+    $('monthlyIncome').value = state.income;
+
+    var container = $('envelopeContainer');
+    container.innerHTML = '';
+
+    var totalBudgeted = 0;
+    var totalSpent = 0;
+    var selectHtml = '';
+
+    state.envelopes.forEach(function (env) {
+      totalBudgeted += env.budget;
+      totalSpent += env.spent;
+
+      selectHtml += '<option value="' + env.id + '">' + escapeHtml(env.name) + '</option>';
+
+      var remaining = env.budget - env.spent;
+      var pct = env.budget > 0 ? Math.min(100, Math.round((env.spent / env.budget) * 100)) : (env.spent > 0 ? 100 : 0);
+
+      var badgeClass = 'badge-ok';
+      var badgeText = 'Healthy';
+      var fillBg = '#16a34a';
+
+      if (remaining < 0) {
+        badgeClass = 'badge-danger';
+        badgeText = 'Over-Budget ($' + Math.abs(remaining).toLocaleString() + ')';
+        fillBg = '#dc2626';
+      } else if (pct >= 85) {
+        badgeClass = 'badge-warn';
+        badgeText = pct + '% Used';
+        fillBg = '#d97706';
+      } else {
+        badgeText = '$' + remaining.toLocaleString() + ' Left';
+      }
+
+      var card = document.createElement('div');
+      card.className = 'env-card';
+      card.innerHTML = 
+        '<div class="env-head">' +
+          '<span class="env-title">' + escapeHtml(env.name) + '</span>' +
+          '<span class="env-badge ' + badgeClass + '">' + badgeText + '</span>' +
+        '</div>' +
+        '<div class="progress-bar">' +
+          '<div class="progress-fill" style="width:' + pct + '%;background:' + fillBg + '"></div>' +
+        '</div>' +
+        '<div class="env-stats">' +
+          '<span>Spent: $' + env.spent.toLocaleString() + '</span>' +
+          '<span>Cap: $' + env.budget.toLocaleString() + '</span>' +
+        '</div>' +
+        '<div class="env-actions">' +
+          '<button type="button" class="btn sm" data-action="quick-add" data-id="' + env.id + '">+ $10</button>' +
+          '<button type="button" class="btn sm" data-action="quick-add50" data-id="' + env.id + '">+ $50</button>' +
+          '<button type="button" class="btn sm" data-action="edit-budget" data-id="' + env.id + '">Edit Cap</button>' +
+          '<button type="button" class="btn sm danger" data-action="del-env" data-id="' + env.id + '">✕</button>' +
+        '</div>';
+
+      container.appendChild(card);
+    });
+
+    $('logEnvSelect').innerHTML = selectHtml || '<option value="">No envelopes yet</option>';
+
+    var leftToBudget = state.income - totalBudgeted;
+    var totalRemaining = state.income - totalSpent;
+
+    $('resTotalBudgeted').textContent = '$' + totalBudgeted.toLocaleString();
+    $('resTotalSpent').textContent = '$' + totalSpent.toLocaleString();
+    $('resTotalRemaining').textContent = '$' + totalRemaining.toLocaleString();
+
+    var leftEl = $('resLeftToBudget');
+    var statusEl = $('resZeroStatus');
+
+    if (leftToBudget === 0) {
+      leftEl.textContent = '$0';
+      leftEl.style.color = 'var(--ok)';
+      statusEl.textContent = '🎉 Perfect Zero-Based Balance!';
+      statusEl.style.color = 'var(--ok)';
+    } else if (leftToBudget > 0) {
+      leftEl.textContent = '+$' + leftToBudget.toLocaleString();
+      leftEl.style.color = 'var(--ok)';
+      statusEl.textContent = '$' + leftToBudget.toLocaleString() + ' Left to assign to envelopes';
+      statusEl.style.color = 'var(--muted)';
+    } else {
+      leftEl.textContent = '-$' + Math.abs(leftToBudget).toLocaleString();
+      leftEl.style.color = 'var(--danger)';
+      statusEl.textContent = '⚠️ Over-budget by $' + Math.abs(leftToBudget).toLocaleString() + '! Reduce caps.';
+      statusEl.style.color = 'var(--danger)';
+    }
+
+    // Update Denominations based on Cash Envelopes (discretionary items like groceries, dining, gas)
+    var cashSum = 0;
+    state.envelopes.forEach(function (e) {
+      // Discretionary envelopes typically cashed out
+      if (!/rent|housing|mortgage|debt|savings/i.test(e.name)) {
+        cashSum += Math.max(0, e.budget);
+      }
+    });
+    if (cashSum === 0) cashSum = totalBudgeted;
+
+    var denoms = computeDenominations(cashSum);
+    $('d100').textContent = denoms[100];
+    $('d50').textContent = denoms[50];
+    $('d20').textContent = denoms[20];
+    $('d10').textContent = denoms[10];
+    $('d5').textContent = denoms[5];
+    $('d1').textContent = denoms[1];
+
+    saveState();
+  }
+
+  function escapeHtml(str) {
+    return String(str)
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;')
+      .replace(/'/g, '&#39;');
+  }
+
+  // Event handlers
+  $('monthlyIncome').addEventListener('input', function (e) {
+    var val = parseFloat(e.target.value);
+    state.income = isNaN(val) || val < 0 ? 0 : val;
+    render();
+  });
+
+  $('btnAddNewEnv').addEventListener('click', function () {
+    $('addEnvDrawer').style.display = 'block';
+    $('newEnvName').focus();
+  });
+
+  $('btnCancelEnv').addEventListener('click', function () {
+    $('addEnvDrawer').style.display = 'none';
+    $('newEnvName').value = '';
+    $('newEnvBudget').value = '';
+  });
+
+  $('btnSaveEnv').addEventListener('click', function () {
+    var name = ($('newEnvName').value || '').trim();
+    var budget = parseFloat($('newEnvBudget').value);
+    if (!name) {
+      showToast('Please enter an envelope name');
+      return;
+    }
+    if (isNaN(budget) || budget < 0) {
+      showToast('Please enter a valid budget amount');
+      return;
+    }
+
+    state.envelopes.push({
+      id: Date.now(),
+      name: name,
+      budget: budget,
+      spent: 0
+    });
+
+    $('addEnvDrawer').style.display = 'none';
+    $('newEnvName').value = '';
+    $('newEnvBudget').value = '';
+    render();
+    showToast('Envelope added!');
+  });
+
+  $('btnLogExpense').addEventListener('click', function () {
+    var envId = parseInt($('logEnvSelect').value, 10);
+    var amount = parseFloat($('logAmount').value);
+    if (!envId) {
+      showToast('Please select an envelope');
+      return;
+    }
+    if (isNaN(amount) || amount <= 0) {
+      showToast('Please enter an expense amount greater than 0');
+      return;
+    }
+
+    var found = false;
+    for (var i = 0; i < state.envelopes.length; i++) {
+      if (state.envelopes[i].id === envId) {
+        state.envelopes[i].spent += amount;
+        found = true;
+        break;
+      }
+    }
+
+    if (found) {
+      $('logAmount').value = '';
+      $('logNote').value = '';
+      render();
+      showToast('Recorded $' + amount.toFixed(2) + ' expense!');
+    }
+  });
+
+  $('envelopeContainer').addEventListener('click', function (e) {
+    var btn = e.target.closest('button');
+    if (!btn) return;
+    var action = btn.getAttribute('data-action');
+    var id = parseInt(btn.getAttribute('data-id'), 10);
+    if (!action || !id) return;
+
+    for (var i = 0; i < state.envelopes.length; i++) {
+      if (state.envelopes[i].id === id) {
+        if (action === 'quick-add') {
+          state.envelopes[i].spent += 10;
+          render();
+          showToast('Added $10 to ' + state.envelopes[i].name);
+        } else if (action === 'quick-add50') {
+          state.envelopes[i].spent += 50;
+          render();
+          showToast('Added $50 to ' + state.envelopes[i].name);
+        } else if (action === 'edit-budget') {
+          var newCap = prompt('Enter new budget cap for ' + state.envelopes[i].name + ' ($):', state.envelopes[i].budget);
+          if (newCap !== null) {
+            var parsed = parseFloat(newCap);
+            if (!isNaN(parsed) && parsed >= 0) {
+              state.envelopes[i].budget = parsed;
+              render();
+              showToast('Updated budget cap!');
+            }
+          }
+        } else if (action === 'del-env') {
+          if (confirm('Delete envelope "' + state.envelopes[i].name + '"?')) {
+            state.envelopes.splice(i, 1);
+            render();
+            showToast('Envelope deleted');
+          }
+        }
+        break;
+      }
+    }
+  });
+
+  $('btnExportCsv').addEventListener('click', function () {
+    var csv = 'Envelope,Budget,Spent,Remaining,PercentUsed\r\n';
+    state.envelopes.forEach(function (e) {
+      var rem = e.budget - e.spent;
+      var pct = e.budget > 0 ? ((e.spent / e.budget) * 100).toFixed(1) : 0;
+      csv += '"' + e.name.replace(/"/g, '""') + '",' + e.budget + ',' + e.spent + ',' + rem + ',' + pct + '%\r\n';
+    });
+    csv += '"TOTALS",' + $('resTotalBudgeted').textContent.replace('$', '') + ',' + $('resTotalSpent').textContent.replace('$', '') + ',' + $('resTotalRemaining').textContent.replace('$', '') + '\r\n';
+
+    var blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+    var url = URL.createObjectURL(blob);
+    var a = document.createElement('a');
+    a.href = url;
+    a.download = 'envelope_budget_' + new Date().toISOString().slice(0, 10) + '.csv';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+    showToast('Exported CSV!');
+  });
+
+  $('btnExportJson').addEventListener('click', function () {
+    var blob = new Blob([JSON.stringify(state, null, 2)], { type: 'application/json' });
+    var url = URL.createObjectURL(blob);
+    var a = document.createElement('a');
+    a.href = url;
+    a.download = 'envelope_budget_backup_' + new Date().toISOString().slice(0, 10) + '.json';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+    showToast('Exported JSON backup!');
+  });
+
+  $('btnResetSample').addEventListener('click', function () {
+    if (confirm('Reset to the standard 50/30/20 envelope plan? Your current allocations will be overwritten.')) {
+      state = {
+        income: 4000,
+        envelopes: JSON.parse(JSON.stringify(DEFAULT_ENVELOPES))
+      };
+      render();
+      showToast('Reset to standard 50/30/20 plan');
+    }
+  });
+
+  $('btnSharePlanner').addEventListener('click', function () {
+    if (navigator.clipboard) {
+      navigator.clipboard.writeText('https://us-envelope-budget-planner.enjoy-onepage.com/').then(function () {
+        showToast('Link copied to clipboard!');
+      });
+    } else {
+      showToast('Share: https://us-envelope-budget-planner.enjoy-onepage.com/');
+    }
+  });
+
+  loadState();
+  render();
+})();
+</script>
+<!-- LOGIC END -->
+
 </body>
 </html>
